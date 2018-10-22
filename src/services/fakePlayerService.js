@@ -17,7 +17,7 @@ const players = [
   {
     _id: "5b21ca3eeb7f6fbccd471817",
     name: "Alfred Morris",
-    position: { _id: "5b21ca3eeb7f6fbccd471820", name: "RB" },
+    position: { _id: "5b21ca3eeb7f6fbccd471818", name: "RB" },
     rank: 3
   },
   {
@@ -54,8 +54,8 @@ const players = [
   {
     _id: "5b21ca3eeb7f6fbccd471821",
     name: "Russel Wilson",
-    position: { _id: "5b21ca3eeb7f6fbccd471818", name: "QB" },
-    rank: 3
+    position: { _id: "5b21ca3eeb7f6fbccd471820", name: "QB" },
+    rank: 2
   }
 ];
 

@@ -4,6 +4,6 @@ export const positions = [
   { _id: "5b21ca3eeb7f6fbccd471820", name: "QB" }
 ];
 
-export function getPositons() {
+export function getPositions() {
   return positions.filter(g => g);
 }
