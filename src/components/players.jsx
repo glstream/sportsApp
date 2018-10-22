@@ -11,8 +11,9 @@ class Players extends Component {
     positions: [],
     pageSize: 3,
     selectedPosition: { _id: "5b21ca3eeb7f6fbccd471820", name: "QB" },
+    currentPage: 1,
     value: 1,
-    currentPage: 1
+    tags:["tag1", 'tag2', 'tag3']
   };
 
   componentDidMount() {
@@ -29,12 +30,18 @@ class Players extends Component {
     this.setState({ selectedPosition: position, currentPage: 1 });
   };
 
-  handleIncrement = () => {
-    this.setState({ value: this.state.value + 1 });
+  handleIncrement = (playerId) => {
+    console.log(playerId)
+    const players = [...this.state.players]
+    console.log(players)
   };
 
+  handleDecrement = () => {
+    this.setState({ value: this.state.value - 1 })
+  }
+
   render() {
-    const { length: count } = this.state.players;
+    //const { length: count } = this.state.players;
     const {
       pageSize,
       currentPage,
@@ -65,6 +72,9 @@ class Players extends Component {
                 <th>Rank</th>
                 <th>Name</th>
                 <th>Position</th>
+                <th>Value</th>
+                <th>Like</th>
+                <th>Self Rank</th>
                 <th />
               </tr>
             </thead>
@@ -74,18 +84,18 @@ class Players extends Component {
                   <td>{player.rank}</td>
                   <td>{player.position.name}</td>
                   <td>{player.name}</td>
+                  <td>{player.value}</td>
+                  <td></td>
                   <td>
                     <button
-                      className="btn btn-secondary btn-sm"
-                      onClick={this.handleIncrement}
-                    >
-                      +
+                      className="btn btn-primary btn-sm m-2"
+                      onClick={() => this.handleIncrement(player._id)}
+                    >+
                     </button>
                     <button
                       className="btn btn-secondary btn-sm"
-                      onClick={this.handleIncrement}
-                    >
-                      -
+                      onClick={this.handleDecrement}
+                    >-
                     </button>
                   </td>
                   <td />
