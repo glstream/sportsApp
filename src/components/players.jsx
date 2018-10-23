@@ -4,6 +4,7 @@ import { getPlayers } from "../services/fakePlayerService";
 import { getPositions } from "../services/fakePositionService";
 import { paginate } from "../utils/paginate";
 import ListGroup from "../common/listGroup";
+import Like from '../common/like';
 
 class Players extends Component {
   state = {
@@ -85,7 +86,9 @@ class Players extends Component {
                   <td>{player.position.name}</td>
                   <td>{player.name}</td>
                   <td>{player.value}</td>
-                  <td></td>
+                  <td>
+                    <Like />
+                  </td>
                   <td>
                     <button
                       className="btn btn-primary btn-sm m-2"
