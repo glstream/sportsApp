@@ -4,17 +4,20 @@ import { getPlayers } from "../services/fakePlayerService";
 import { getPositions } from "../services/fakePositionService";
 import { paginate } from "../utils/paginate";
 import ListGroup from "../common/listGroup";
-import Like from '../common/like';
+import Like from "../common/like";
+import Increment from "../common/increment";
+import Decrement from "../common/decrement";
+import Value from "../common/value";
 
 class Players extends Component {
   state = {
     players: [],
     positions: [],
-    pageSize: 3,
+    pageSize: 4,
     selectedPosition: { _id: "5b21ca3eeb7f6fbccd471820", name: "QB" },
     currentPage: 1,
     value: 1,
-    tags:["tag1", 'tag2', 'tag3']
+    tags: ["tag1", "tag2", "tag3"]
   };
 
   componentDidMount() {
@@ -31,15 +34,34 @@ class Players extends Component {
     this.setState({ selectedPosition: position, currentPage: 1 });
   };
 
-  handleIncrement = (playerId) => {
-    console.log(playerId)
-    const players = [...this.state.players]
-    console.log(players)
+  handleIncrement = player => {
+    //console.log("Increment Clicked", player);
+    const players = [...this.state.players];
+    const index = players.indexOf(player);
+    players[index] = { ...players[index] };
+    console.log(players[index]);
+    players[index].value++;
+    this.setState({ players });
   };
 
-  handleDecrement = () => {
-    this.setState({ value: this.state.value - 1 })
-  }
+  handleDecrement = player => {
+    //console.log("Increment Clicked", player);
+    const players = [...this.state.players];
+    const index = players.indexOf(player);
+    players[index] = { ...players[index] };
+    console.log(players[index]);
+    players[index].value--;
+    this.setState({ players });
+  };
+
+  handleLike = player => {
+    const players = [...this.state.players];
+    const index = players.indexOf(player);
+    console.log(index);
+    players[index] = { ...players[index] };
+    console.log(players[index]);
+    players[index].liked = !players[index].liked;
+  };
 
   render() {
     //const { length: count } = this.state.players;
@@ -74,7 +96,7 @@ class Players extends Component {
                 <th>Name</th>
                 <th>Position</th>
                 <th>Value</th>
-                <th>Like</th>
+                {/* <th>Like</th> */}
                 <th>Self Rank</th>
                 <th />
               </tr>
@@ -86,22 +108,16 @@ class Players extends Component {
                   <td>{player.position.name}</td>
                   <td>{player.name}</td>
                   <td>{player.value}</td>
+                  {/* <td>
+                    <Like
+                      liked={player.liked}
+                      onClick={() => this.handleLike(player)}
+                    />
+                  </td> */}
                   <td>
-                    <Like />
+                    <Increment onClick={() => this.handleIncrement(player)} />
+                    <Decrement onClick={() => this.handleDecrement(player)} />
                   </td>
-                  <td>
-                    <button
-                      className="btn btn-primary btn-sm m-2"
-                      onClick={() => this.handleIncrement(player._id)}
-                    >+
-                    </button>
-                    <button
-                      className="btn btn-secondary btn-sm"
-                      onClick={this.handleDecrement}
-                    >-
-                    </button>
-                  </td>
-                  <td />
                 </tr>
               ))}
             </tbody>

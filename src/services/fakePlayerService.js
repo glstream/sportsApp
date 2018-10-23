@@ -6,7 +6,8 @@ const players = [
     name: "Alvin Kamara",
     position: { _id: "5b21ca3eeb7f6fbccd471818", name: "RB" },
     rank: 1,
-    value: 1,
+    value: 15,
+    liked: true,
     publishDate: "2018-01-03T19:04:28.809Z"
   },
   {
@@ -14,21 +15,21 @@ const players = [
     name: "Marshawn Lynch",
     position: { _id: "5b21ca3eeb7f6fbccd471818", name: "RB" },
     rank: 2,
-    value: 1
+    value: 9
   },
   {
     _id: "5b21ca3eeb7f6fbccd471817",
     name: "Alfred Morris",
     position: { _id: "5b21ca3eeb7f6fbccd471818", name: "RB" },
     rank: 3,
-    value: 1
+    value: 4
   },
   {
     _id: "5b21ca3eeb7f6fbccd471819",
     name: "Allen Robinson",
     position: { _id: "5b21ca3eeb7f6fbccd471814", name: "WR" },
     rank: 2,
-    value: 1
+    value: 7
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181a",
@@ -36,35 +37,35 @@ const players = [
     position: { _id: "5b21ca3eeb7f6fbccd471814", name: "WR" },
     rank: 3,
     dailyRentalRate: 3.5,
-    value: 1
+    value: 19
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181b",
     name: "Julio Jones",
     position: { _id: "5b21ca3eeb7f6fbccd471814", name: "WR" },
     rank: 1,
-    value: 1
+    value: 10
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181e",
     name: "Patrick Mahomes",
     position: { _id: "5b21ca3eeb7f6fbccd471820", name: "QB" },
     rank: 1,
-    value: 1
+    value: 5
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181f",
     name: "Sam Darnold",
     position: { _id: "5b21ca3eeb7f6fbccd471820", name: "QB" },
     rank: 3,
-    value: 1
+    value: 6
   },
   {
     _id: "5b21ca3eeb7f6fbccd471821",
     name: "Russel Wilson",
     position: { _id: "5b21ca3eeb7f6fbccd471820", name: "QB" },
     rank: 2,
-    value: 1
+    value: 17
   }
 ];
 
