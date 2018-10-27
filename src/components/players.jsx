@@ -4,10 +4,8 @@ import { getPlayers } from "../services/fakePlayerService";
 import { getPositions } from "../services/fakePositionService";
 import { paginate } from "../utils/paginate";
 import ListGroup from "../common/listGroup";
-import Like from "../common/like";
-import Increment from "../common/increment";
-import Decrement from "../common/decrement";
-import Value from "../common/value";
+import PlayersTable from "./playersTable";
+import _ from 'lodash';
 
 class Players extends Component {
   state = {
@@ -17,11 +15,11 @@ class Players extends Component {
     selectedPosition: { _id: "5b21ca3eeb7f6fbccd471820", name: "QB" },
     currentPage: 1,
     value: 1,
-    tags: ["tag1", "tag2", "tag3"]
+    sortColumn: {path: 'name', order: 'acs'}
   };
 
   componentDidMount() {
-    const positions = [{ name: "Overall" }, ...getPositions()];
+    const positions = [{ name: "Overall", _id:""}, ...getPositions()];
 
     this.setState({ players: getPlayers(), positions });
   }
@@ -63,12 +61,18 @@ class Players extends Component {
     players[index].liked = !players[index].liked;
   };
 
+  handleSort = sortColumn => {
+ 
+    this.setState({ sortColumn });
+  }
+
   render() {
     //const { length: count } = this.state.players;
     const {
       pageSize,
       currentPage,
       selectedPosition,
+      sortColumn,
       players: allPlayers
     } = this.state;
 
@@ -76,8 +80,10 @@ class Players extends Component {
       selectedPosition && selectedPosition._id
         ? allPlayers.filter(p => p.position._id === selectedPosition._id)
         : allPlayers;
+    
+    const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order])
 
-    const players = paginate(filtered, currentPage, pageSize);
+    const players = paginate(sorted, currentPage, pageSize);
 
     return (
       <div className="row">
@@ -88,40 +94,14 @@ class Players extends Component {
             onItemSelect={this.handlePositionSelect}
           />
         </div>
-        <div className="col">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Value</th>
-                {/* <th>Like</th> */}
-                <th>Self Rank</th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              {players.map(player => (
-                <tr key={player.name}>
-                  <td>{player.rank}</td>
-                  <td>{player.position.name}</td>
-                  <td>{player.name}</td>
-                  <td>{player.value}</td>
-                  {/* <td>
-                    <Like
-                      liked={player.liked}
-                      onClick={() => this.handleLike(player)}
-                    />
-                  </td> */}
-                  <td>
-                    <Increment onClick={() => this.handleIncrement(player)} />
-                    <Decrement onClick={() => this.handleDecrement(player)} />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="col-5">
+          <PlayersTable 
+          players={players}
+          sortColumn={sortColumn}
+          onIncrement={this.handleIncrement}
+          onDecrement= {this.handleDecrement}
+          onSort={this.handleSort}
+          />
           <Pagination
             itemsCount={filtered.length}
             pageSize={pageSize}

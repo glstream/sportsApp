@@ -3,12 +3,9 @@ import React, { Component } from "react";
 class Decrement extends Component {
   render() {
     return (
-      <button
-        className="btn btn-secondary btn-sm m-2"
-        onClick={this.props.onClick}
-      >
-        -
-      </button>
+      <button type="button" className="btn btn-outline-danger m-1" onClick={this.props.onClick} 
+      style= {{ cursor: 'pointer'}} >-</button>
+      
     );
   }
 }
